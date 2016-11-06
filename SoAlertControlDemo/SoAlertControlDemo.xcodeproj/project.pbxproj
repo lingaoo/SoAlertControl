@@ -17,7 +17,7 @@
 		9C9378AF1DCED54B0009198C /* SoAlertControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9378A91DCED54B0009198C /* SoAlertControl.m */; };
 		9C9378B01DCED54B0009198C /* SoAlertCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9378AB1DCED54B0009198C /* SoAlertCustomView.m */; };
 		9C9378B11DCED54B0009198C /* SoAlertStdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9378AD1DCED54B0009198C /* SoAlertStdView.m */; };
-		9C9378B31DCF692D0009198C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9C9378B21DCF692D0009198C /* README.md */; };
+		9C9378B51DCF7DFB0009198C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9C9378B41DCF7DFB0009198C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +38,7 @@
 		9C9378AB1DCED54B0009198C /* SoAlertCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoAlertCustomView.m; sourceTree = "<group>"; };
 		9C9378AC1DCED54B0009198C /* SoAlertStdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoAlertStdView.h; sourceTree = "<group>"; };
 		9C9378AD1DCED54B0009198C /* SoAlertStdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoAlertStdView.m; sourceTree = "<group>"; };
-		9C9378B21DCF692D0009198C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9C9378B41DCF7DFB0009198C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 		9C9378831DCED5400009198C = {
 			isa = PBXGroup;
 			children = (
-				9C9378B21DCF692D0009198C /* README.md */,
+				9C9378B41DCF7DFB0009198C /* README.md */,
 				9C93788E1DCED5400009198C /* SoAlertControlDemo */,
 				9C93788D1DCED5400009198C /* Products */,
 			);
@@ -182,9 +182,9 @@
 				9C9378971DCED5400009198C /* ViewController.m in Sources */,
 				9C9378B11DCED54B0009198C /* SoAlertStdView.m in Sources */,
 				9C9378B01DCED54B0009198C /* SoAlertCustomView.m in Sources */,
-				9C9378B31DCF692D0009198C /* README.md in Sources */,
 				9C9378941DCED5400009198C /* AppDelegate.m in Sources */,
 				9C9378AF1DCED54B0009198C /* SoAlertControl.m in Sources */,
+				9C9378B51DCF7DFB0009198C /* README.md in Sources */,
 				9C9378911DCED5400009198C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
