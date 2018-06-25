@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "SoAlertControl"
-  s.version      = "0.0.1"
+  s.version      = "1.0.1"
   s.summary      = "自定义AlertView"
   s.homepage     = "https://github.com/lingaoo/SoAlertControl"
   s.license      = "MIT"
