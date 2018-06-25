@@ -15,12 +15,6 @@
     MyAlertView *myalertView = [MyAlertView alertView];
     myalertView.stringTitle = titleString;
     myalertView.stringMessage = msgString;
-    
-    [myalertView addLabelOther:^(UILabel *label) {
-        label.frame = CGRectMake(0, 0, 100, 100);
-        label.text = @"1111";
-    }];
-    
     return myalertView;
 }
 

@@ -27,7 +27,6 @@
 
 @property (nonatomic,strong,readwrite) NSMutableArray *buttonMutableClicksBlock;
 
-
 @end
 
 @implementation SoAlertView
@@ -77,7 +76,7 @@
 -(UILabel*)labelTitle {
     if(_labelTitle == nil) {
         _labelTitle = [self createLabelOther];
-        _labelTitle.font = [UIFont systemFontOfSize:KK_LABELTITLE_FONT];
+        _labelTitle.font = [UIFont systemFontOfSize:kLABELTITLE_FONT];
         _labelTitle.frame = CGRectMake(10, 20, self.frame.size.width - 20 , kTITLEHEIGHT);
         [self addSubview:_labelTitle];
     }
@@ -86,7 +85,7 @@
 -(UILabel *)labelMessage {
     if(_labelMessage == nil) {
         _labelMessage = [self createLabelOther];
-        _labelMessage.font = [UIFont systemFontOfSize:KK_LABELMESSAGE_FONT];
+        _labelMessage.font = [UIFont systemFontOfSize:kLABELMESSAGE_FONT];
         _labelMessage.frame = CGRectMake(10, 20 + kTITLEHEIGHT + 10, self.frame.size.width - 20 , kMESSAGEHEIGHT);
         [self addSubview:_labelMessage];
     }
@@ -106,7 +105,7 @@
 -(void)addLabelOther:(void (^)(UILabel *))labelConfig
 {
     UILabel *labelOther = [self createLabelOther];
-    labelOther.font   = [UIFont systemFontOfSize:KK_LABELMESSAGE_FONT];
+    labelOther.font = [UIFont systemFontOfSize:kLABELMESSAGE_FONT];
     [self addSubview:labelOther];
     !labelConfig?:labelConfig(labelOther);
 }

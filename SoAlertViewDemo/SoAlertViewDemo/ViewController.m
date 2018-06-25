@@ -29,28 +29,28 @@
 
 -(void)asdf {
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        MyAlertView *myalert2 = [MyAlertView alertViewWithTitle:@"title"
-                                                        Message:@"mesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesg"];
-        [myalert2 addButtonLeft:@"111" right:@"33" leftBlock:^(SoAlertView *alertView, UIButton *button) {
-            [alertView dismiss];
-        } rightBlock:^(SoAlertView *alertView, UIButton *button) {
-            [alertView dismiss];
-        }];
-        [myalert2 showComplete:^{
-            NSLog(@"asdfasdf");
-        }];
-    });
-    
-    
-    MyAlertView *myalert = [MyAlertView alertViewWithTitle:@"title11" Message:@"mesgmesgmesgmessdgsdgfmesgmesgmesgmesgmesg"];
-    [myalert addButtonTitle:@"sdfasdf" click:^(SoAlertView *alertView, UIButton *button) {
-        NSLog(@"%@",button);
+    MyAlertView *myalert2 = [MyAlertView alertViewWithTitle:@"title"
+                                                    Message:@"mesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmesgmessgmesg"];
+    [myalert2 addButtonLeft:@"111" right:@"33" leftBlock:^(SoAlertView *alertView, UIButton *button) {
+        [alertView dismiss];
+    } rightBlock:^(SoAlertView *alertView, UIButton *button) {
         [alertView dismiss];
     }];
+    [myalert2 showComplete:^{
+        NSLog(@"asdfasdf");
+    }];
     
-    [myalert show];
-
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        MyAlertView *myalert = [MyAlertView alertViewWithTitle:@"TITLE" Message:@"MESSAG"];
+        [myalert addButtonTitle:@"Cancel" click:^(SoAlertView *alertView, UIButton *button) {
+            NSLog(@"%@",button);
+            [alertView dismiss];
+        }];
+        [myalert show];
+        
+    });
+    
 }
 
 - (void)didReceiveMemoryWarning {

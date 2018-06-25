@@ -136,16 +136,16 @@
         [self.bgView removeFromSuperview];
         self.bgView = nil;
         self.isVisiable = NO;
+        [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
+        self.window.alpha = 0;
+        self.window.hidden = YES;
+        self.window = nil;
         if(complete) complete();
         if ([SoAlertViewManager shareInstance].alertQueue.count > 0) {
             SoAlertControl *soAlert = [SoAlertViewManager shareInstance].alertQueue.firstObject;
             [soAlert show];
         }else{
             [SoAlertViewManager shareInstance].alertControl = nil;
-            [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
-            self.window.alpha = 0;
-            self.window.hidden = YES;
-            self.window = nil;
         }
     }];
 }
@@ -157,16 +157,17 @@
         [self.bgView removeFromSuperview];
         self.bgView = nil;
         self.isVisiable = NO;
+        [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
+        self.window.alpha = 0;
+        self.window.hidden = YES;
+        self.window = nil;
         if(complete) complete();
         if ([SoAlertViewManager shareInstance].alertQueue.count > 0) {
             SoAlertControl *soAlert = [SoAlertViewManager shareInstance].alertQueue.firstObject;
             [soAlert show];
         }else{
             [SoAlertViewManager shareInstance].alertControl = nil;
-            [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
-            self.window.alpha = 0;
-            self.window.hidden = YES;
-            self.window = nil;
+ 
         }
     }];
 }

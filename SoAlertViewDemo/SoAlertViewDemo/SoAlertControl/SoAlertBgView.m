@@ -7,6 +7,7 @@
 //
 
 #import "SoAlertBgView.h"
+#import "SoAlertControl.h"
 
 @implementation SoAlertBgView
 
@@ -23,22 +24,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-- (void)addScreenShot 
-{
-//    UIWindow *screenWindow = [UIApplication sharedApplication].windows.firstObject;
-//    UIGraphicsBeginImageContext(screenWindow.frame.size);
-//    [screenWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    UIImage *originalImage = nil;
-//    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)) {
-//        originalImage = viewImage;
-//    } else {
-//        originalImage = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(viewImage.CGImage, CGRectMake(0, 20, 320, 460))];
-//    }
-//    self.screenShotView = [[UIImageView alloc] initWithImage:originalImage];
-//    [self addSubview:self.screenShotView];
-}
 
 -(void)grayLayer
 {
@@ -51,22 +36,31 @@
 #pragma mark- 键盘监听的通知执行方法
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
+    CGRect contentViewFrame = [SoAlertViewManager shareInstance].alertControl.contentView.frame;
     CGFloat animationDuration=0;
     NSDictionary* info = [aNotification userInfo];
     animationDuration = [[info valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.frame = CGRectMake(0, -kbSize.height, self.frame.size.width, self.frame.size.height);
-    } completion:NULL];
+    CGFloat move = 0.0f;
+    if(contentViewFrame.origin.y + contentViewFrame.size.height > self.bounds.size.height - kbSize.height) {
+        move = contentViewFrame.origin.y + contentViewFrame.size.height - (self.bounds.size.height - kbSize.height);
+        [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.frame = CGRectMake(0, -(move+8) , self.frame.size.width, self.frame.size.height);
+        } completion:NULL];
+    }
+   
+  
 }
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     CGFloat animationDuration=0;
     NSDictionary* info = [aNotification userInfo];
     animationDuration = [[info valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    } completion:NULL];
+    if(self.frame.origin.y != 0) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        } completion:NULL];
+    }
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
