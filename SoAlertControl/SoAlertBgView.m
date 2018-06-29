@@ -38,6 +38,9 @@
 //    }
 //    self.screenShotView = [[UIImageView alloc] initWithImage:originalImage];
 //    [self addSubview:self.screenShotView];
+    //    UIVisualEffectView *visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    //    visualEfView.frame =self.bounds;
+    //    [self addSubview:visualEfView];
 }
 
 -(void)grayLayer

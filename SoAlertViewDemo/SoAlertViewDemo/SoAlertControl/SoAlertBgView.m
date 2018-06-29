@@ -32,6 +32,9 @@
     grayView.userInteractionEnabled = NO;
 //    self.grayView = grayView;
     [self addSubview:grayView];
+    //    UIVisualEffectView *visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    //    visualEfView.frame =self.bounds;
+    //    [self addSubview:visualEfView];
 }
 #pragma mark- 键盘监听的通知执行方法
 - (void)keyboardWasShown:(NSNotification*)aNotification
