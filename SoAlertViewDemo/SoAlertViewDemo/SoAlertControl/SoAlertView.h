@@ -12,8 +12,8 @@
 #define kLABELTITLE_FONT 18   // title 字体
 #define kLABELMESSAGE_FONT 15 // message 字体
 
+#define kTITLEHEIGHT 30     // title 高度
 #define kMESSAGEHEIGHT 44   // message 高度
-#define kTITLEHEIGHT 44     // title 高度
 #define kBUTTONHEIGHT 48     // button 高度
 
 // 继承 SoAlertView 自定义 MyAlertView
@@ -58,6 +58,11 @@
  @param lineViewConfig lineView
  */
 -(void)addLineView:(void (^)(UIView *lineView))lineViewConfig;
+
+/// 内容与按钮分隔线按钮
+-(void)configCenterLineView:(UIView *)lineView;
+/// 左右按钮分隔线
+-(void)configButtonLineView:(UIView *)lineView;
 
 /**
  初始化 Button

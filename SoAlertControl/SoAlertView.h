@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SoAlertControl.h"
 
-#define KK_LABELTITLE_FONT 18   // title 字体
-#define KK_LABELMESSAGE_FONT 15 // message 字体
+#define kLABELTITLE_FONT 18   // title 字体
+#define kLABELMESSAGE_FONT 15 // message 字体
 
+#define kTITLEHEIGHT 30     // title 高度
 #define kMESSAGEHEIGHT 44   // message 高度
-#define kTITLEHEIGHT 44     // title 高度
 #define kBUTTONHEIGHT 48     // button 高度
 
 // 继承 SoAlertView 自定义 MyAlertView
@@ -22,10 +22,10 @@
 {
     
 }
-/// 设置labelTitle的title，labelTitle和SoAlertView并适应内容大小
+/// labelTitle的title，设置該值labelTitle和SoAlertView并适应内容大小
 @property (copy, nonatomic) NSString *stringTitle;
 
-/// 设置labelMessage的title，labelMessage和SoAlertView并适应内容大小
+/// labelMessage的title，设置該值labelMessage和SoAlertView并适应内容大小
 @property (copy, nonatomic) NSString *stringMessage;
 
 /// title
@@ -59,14 +59,26 @@
  */
 -(void)addLineView:(void (^)(UIView *lineView))lineViewConfig;
 
+/// 内容与按钮分隔线按钮
+-(void)configCenterLineView:(UIView *)lineView;
+/// 左右按钮分隔线
+-(void)configButtonLineView:(UIView *)lineView;
+
 /**
  初始化 Button
- configOnlyButton:corner:底边按钮 corner(推荐值10)
- configLeftButton:corner:与configRightButton:corner:一般搭配使用一左一右。
  @param buttonConfig button设置
  @param clickBlock button点击
  */
 -(void)addButtonConfig:(void (^)(UIButton *button))buttonConfig click:(void (^)(SoAlertView *alertView,UIButton *button))clickBlock;
+
+
+/**
+ Button 设置
+ configOnlyButton:corner:底边按钮 corner(推荐值10)
+ configLeftButton:corner:与configRightButton:corner:一般搭配使用一左一右。
+ @param btn button
+ @param corner 圆角
+ */
 -(void)configOnlyButton:(UIButton *)btn corner:(CGFloat)corner;
 -(void)configLeftButton:(UIButton *)leftBtn corner:(CGFloat)corner;
 -(void)configRightButton:(UIButton *)rightBtn corner:(CGFloat)corner;

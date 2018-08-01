@@ -15,7 +15,8 @@
 {
     self = [super initWithFrame:[UIScreen mainScreen].bounds];
     [self grayLayer];
-    
+    // 添加右边约束：blueView的右边距离父控件右边有10的间距
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     return self;
@@ -35,6 +36,18 @@
     //    UIVisualEffectView *visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
     //    visualEfView.frame =self.bounds;
     //    [self addSubview:visualEfView];
+    grayView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:grayView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+    [self addConstraint:rightConstraint];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:grayView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+    [self addConstraint:leftConstraint];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:grayView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+    [self addConstraint:topConstraint];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:grayView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    [self addConstraint:bottomConstraint];
 }
 #pragma mark- 键盘监听的通知执行方法
 - (void)keyboardWasShown:(NSNotification*)aNotification
@@ -51,8 +64,6 @@
             self.frame = CGRectMake(0, -(move+8) , self.frame.size.width, self.frame.size.height);
         } completion:NULL];
     }
-   
-  
 }
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
@@ -63,6 +74,17 @@
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         } completion:NULL];
+    }
+}
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    NSLog(@"%@",NSStringFromCGSize(size));
+
+    if (size.width > size.height) { // 横屏
+        // 横屏布局 balabala
+        
+        
+    } else {
+        // 竖屏布局 balabala
     }
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

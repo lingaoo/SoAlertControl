@@ -34,7 +34,6 @@ typedef enum : NSUInteger {
 
 /// 当前alertControl
 @property (nonatomic,strong)SoAlertControl *alertControl;
-
 /// alert 队列
 @property (nonatomic,strong)NSMutableArray *alertQueue;
 
@@ -42,7 +41,14 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,assign)SoAlertControlType controlType;
 
-
 +(instancetype)shareInstance;
 
 @end
+
+
+
+
+
+
+
+

@@ -48,46 +48,57 @@
 {
     _stringTitle = stringTitle;
     self.labelTitle.text = stringTitle;
-    CGRect frame = self.labelTitle.frame;
-    CGSize size = [self sizeWithString:stringTitle size:CGSizeMake(self.labelTitle.frame.size.width, MAXFLOAT) fontFloat:self.labelTitle.font.pointSize];
-    if(size.height < kTITLEHEIGHT ) return;
-    frame.size = CGSizeMake(frame.size.width, size.height);
-    
-    CGRect selfFrame = self.bounds;
-    selfFrame.size.height =  selfFrame.size.height + size.height - kTITLEHEIGHT;
-    self.bounds = selfFrame;
-    self.labelTitle.frame = frame;
 }
 -(void)setStringMessage:(NSString *)stringMessage
 {
     _stringMessage = stringMessage;
     self.labelMessage.text = stringMessage;
-    CGRect frame = self.labelMessage.frame;
-    CGSize size = [self sizeWithString:stringMessage size:CGSizeMake(self.labelMessage.frame.size.width, MAXFLOAT) fontFloat:self.labelMessage.font.pointSize];
-    if(size.height < kMESSAGEHEIGHT ) return;
-
-    frame.size = CGSizeMake(frame.size.width, size.height);;
-    
-    CGRect selfFrame = self.frame;
-    selfFrame.size.height =  selfFrame.size.height + size.height - kMESSAGEHEIGHT;
-    self.frame = selfFrame;
-    self.labelMessage.frame = frame;
 }
--(UILabel*)labelTitle {
+-(UILabel*)labelTitle
+{
     if(_labelTitle == nil) {
         _labelTitle = [self createLabelOther];
         _labelTitle.font = [UIFont systemFontOfSize:kLABELTITLE_FONT];
         _labelTitle.frame = CGRectMake(10, 20, self.frame.size.width - 20 , kTITLEHEIGHT);
         [self addSubview:_labelTitle];
+        _labelTitle.translatesAutoresizingMaskIntoConstraints = NO;
+        NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_labelTitle attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-12];
+        [self addConstraint:rightConstraint];
+        
+        NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_labelTitle attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:12];
+        [self addConstraint:leftConstraint];
+        
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_labelTitle attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:20];
+        [self addConstraint:topConstraint];
+        
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_labelTitle attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:kTITLEHEIGHT];
+        [self addConstraint:bottomConstraint];
     }
     return _labelTitle;
 }
--(UILabel *)labelMessage {
+-(UILabel *)labelMessage
+{
     if(_labelMessage == nil) {
         _labelMessage = [self createLabelOther];
         _labelMessage.font = [UIFont systemFontOfSize:kLABELMESSAGE_FONT];
         _labelMessage.frame = CGRectMake(10, 20 + kTITLEHEIGHT + 10, self.frame.size.width - 20 , kMESSAGEHEIGHT);
         [self addSubview:_labelMessage];
+        
+        _labelMessage.translatesAutoresizingMaskIntoConstraints = NO;
+        NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_labelMessage attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-12];
+        [self addConstraint:rightConstraint];
+
+        NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_labelMessage attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:12];
+        [self addConstraint:leftConstraint];
+
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_labelMessage attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.labelTitle attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12];
+        [self addConstraint:topConstraint];
+        
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_labelMessage attribute:NSLayoutAttributeBottom  relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-kBUTTONHEIGHT - 20];
+        [self addConstraint:bottomConstraint];
+        
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_labelMessage attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:kMESSAGEHEIGHT];
+        [self addConstraint:heightConstraint];
     }
     return _labelMessage;
 }
@@ -100,6 +111,7 @@
     SoAlertView *alertView = [[[self class] alloc] initWithFrame:(CGRect){0,0,[UIScreen mainScreen].bounds.size.width - 40,180}];
     alertView.layer.cornerRadius = 10;
     alertView.backgroundColor = [UIColor whiteColor];
+
     return alertView;
 }
 -(void)addLabelOther:(void (^)(UILabel *))labelConfig
@@ -123,6 +135,41 @@
     lineView.backgroundColor = [UIColor grayColor];
     [self addSubview:lineView];
     !lineViewConfig?:lineViewConfig(lineView);
+}
+
+-(void)centerLineView
+{
+    UIView *lineView = [[UIView alloc]initWithFrame:(CGRect){0,self.frame.size.height - kBUTTONHEIGHT,self.frame.size.width,1.0/[UIScreen mainScreen].scale}];
+    lineView.backgroundColor = [UIColor grayColor];
+    [self addSubview:lineView];
+ 
+}
+-(void)configCenterLineView:(UIView *)lineView
+{
+    lineView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+    [self addConstraint:rightConstraint];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+    [self addConstraint:leftConstraint];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:1.0/[UIScreen mainScreen].scale];
+    [self addConstraint:topConstraint];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-kBUTTONHEIGHT];
+    [self addConstraint:bottomConstraint];
+}
+-(void)configButtonLineView:(UIView *)lineView
+{
+    lineView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    [self addConstraint:rightConstraint];
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.0 constant:1.0/[UIScreen mainScreen].scale];
+    [self addConstraint:topConstraint];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:kBUTTONHEIGHT];
+    [self addConstraint:heightConstraint];
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:lineView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    [self addConstraint:bottomConstraint];
 }
 
 -(void)addButtonConfig:(void (^)(UIButton *))buttonConfig click:(void (^)(SoAlertView *alertView,UIButton *))clickBlock
@@ -159,9 +206,25 @@
     CGFloat btnHeight = kBUTTONHEIGHT;
     CGFloat btnWidth = self.frame.size.width;
     CGFloat btnOriginY = self.frame.size.height - btnHeight;
-    
     btn.frame = CGRectMake(0, btnOriginY, btnWidth, btnHeight);
+    btn.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+    [self addConstraint:rightConstraint];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+    [self addConstraint:leftConstraint];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:kBUTTONHEIGHT];
+    [self addConstraint:topConstraint];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    [self addConstraint:bottomConstraint];
+    
+    [self setNeedsLayout];
+    [btn setNeedsLayout];
+
     btn.layer.masksToBounds = YES;
+    
     [btn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1]] forState:UIControlStateHighlighted];
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(corner, corner)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -175,9 +238,22 @@
     CGFloat btnHeight = kBUTTONHEIGHT;
     CGFloat btnWidth = self.frame.size.width/2.0;
     CGFloat btnOriginY = self.frame.size.height - btnHeight;
+    leftBtn.frame = CGRectMake(0, btnOriginY, btnWidth, btnHeight);
+
+    leftBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:leftBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.5 constant:0];
+    [self addConstraint:rightConstraint];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:leftBtn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+    [self addConstraint:leftConstraint];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:leftBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:kBUTTONHEIGHT];
+    [self addConstraint:topConstraint];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:leftBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    [self addConstraint:bottomConstraint];
     
     [leftBtn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1]] forState:UIControlStateHighlighted];
-    leftBtn.frame = CGRectMake(0, btnOriginY, btnWidth, btnHeight);
     leftBtn.layer.masksToBounds = YES;
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:leftBtn.bounds byRoundingCorners:UIRectCornerBottomLeft cornerRadii:CGSizeMake(corner, corner)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -193,6 +269,20 @@
     CGFloat btnOriginY = self.frame.size.height - btnHeight;
     
     rightBtn.frame = CGRectMake(btnWidth, btnOriginY, btnWidth, btnHeight);
+    
+    rightBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:rightBtn attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+    [self addConstraint:rightConstraint];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:rightBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.5 constant:0];
+    [self addConstraint:leftConstraint];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:rightBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.0 constant:kBUTTONHEIGHT];
+    [self addConstraint:topConstraint];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:rightBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    [self addConstraint:bottomConstraint];
+    
     rightBtn.layer.masksToBounds = YES;
     [rightBtn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1]] forState:UIControlStateHighlighted];
 

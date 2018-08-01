@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E7700BB021116B2600678CFF /* MyXIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7700BAE21116B2600678CFF /* MyXIBAlertView.m */; };
+		E7700BB121116B2600678CFF /* MyXIBAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7700BAF21116B2600678CFF /* MyXIBAlertView.xib */; };
 		E7BD2C0720DB432C0096C68D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BD2C0620DB432C0096C68D /* AppDelegate.m */; };
 		E7BD2C0A20DB432C0096C68D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BD2C0920DB432C0096C68D /* ViewController.m */; };
 		E7BD2C0D20DB432C0096C68D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BD2C0B20DB432C0096C68D /* Main.storyboard */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E7700BAD21116B2600678CFF /* MyXIBAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyXIBAlertView.h; sourceTree = "<group>"; };
+		E7700BAE21116B2600678CFF /* MyXIBAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyXIBAlertView.m; sourceTree = "<group>"; };
+		E7700BAF21116B2600678CFF /* MyXIBAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyXIBAlertView.xib; sourceTree = "<group>"; };
 		E7BD2C0220DB432C0096C68D /* SoAlertViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoAlertViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BD2C0520DB432C0096C68D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E7BD2C0620DB432C0096C68D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -77,6 +82,9 @@
 				E7BD2C0920DB432C0096C68D /* ViewController.m */,
 				E7BD2C3520DB43990096C68D /* MyAlertView.h */,
 				E7BD2C3620DB43990096C68D /* MyAlertView.m */,
+				E7700BAD21116B2600678CFF /* MyXIBAlertView.h */,
+				E7700BAE21116B2600678CFF /* MyXIBAlertView.m */,
+				E7700BAF21116B2600678CFF /* MyXIBAlertView.xib */,
 				E7BD2C0B20DB432C0096C68D /* Main.storyboard */,
 				E7BD2C0E20DB432E0096C68D /* Assets.xcassets */,
 				E7BD2C1020DB432E0096C68D /* LaunchScreen.storyboard */,
@@ -159,6 +167,7 @@
 				E7BD2C1220DB432E0096C68D /* LaunchScreen.storyboard in Resources */,
 				E7BD2C0F20DB432E0096C68D /* Assets.xcassets in Resources */,
 				E7BD2C0D20DB432C0096C68D /* Main.storyboard in Resources */,
+				E7700BB121116B2600678CFF /* MyXIBAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +185,7 @@
 				E7BD2C0720DB432C0096C68D /* AppDelegate.m in Sources */,
 				E7BD2C3720DB43990096C68D /* MyAlertView.m in Sources */,
 				E7BD2C3320DB43540096C68D /* SoAlertView.m in Sources */,
+				E7700BB021116B2600678CFF /* MyXIBAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +326,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z2LCS42NJL;
 				INFOPLIST_FILE = SoAlertViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +344,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z2LCS42NJL;
 				INFOPLIST_FILE = SoAlertViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

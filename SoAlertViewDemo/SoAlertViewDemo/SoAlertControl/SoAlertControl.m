@@ -24,10 +24,11 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         share = [[SoAlertViewManager alloc]init];
-        share.controlType = KK_ALERTCONTROL_STACK ? SoAlertControlStack:SoAlertControlHeap;        
+        share.controlType = KK_ALERTCONTROL_STACK ? SoAlertControlStack:SoAlertControlHeap;
     });
     return share;
 }
+
 
 @end
 
@@ -111,12 +112,13 @@
     }else {
         if(self.isVisiable) return;
     }
-    
     [self.bgView addSubview:self.contentView];
     [self.window addSubview:self.bgView];
+    [self autolayout];
 
     self.isVisiable = YES;
     [SoAlertViewManager shareInstance].alertControl = self;
+
     self.contentView.transform = CGAffineTransformMakeScale(0.8,0.8);
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.8 options:UIViewAnimationOptionLayoutSubviews animations:^{
         self.contentView.transform = CGAffineTransformMakeScale(1,1);
@@ -128,7 +130,7 @@
 }
 -(void)dismissComplete:(void (^)(void))complete {
     [[SoAlertViewManager shareInstance].alertQueue removeObject:self];
-
+    
     [UIView animateWithDuration:0.3  animations:^{
         self.contentView.transform = CGAffineTransformMakeScale(0.9,0.9);
         self.contentView.alpha = 0.5;
@@ -136,7 +138,9 @@
         [self.bgView removeFromSuperview];
         self.bgView = nil;
         self.isVisiable = NO;
-        [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
+        [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
         self.window.alpha = 0;
         self.window.hidden = YES;
         self.window = nil;
@@ -167,8 +171,59 @@
             [soAlert show];
         }else{
             [SoAlertViewManager shareInstance].alertControl = nil;
- 
+            
         }
     }];
 }
+
+-(void)autolayout {
+     self.bgView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.bgView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.window attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+    [self.window addConstraint:rightConstraint];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.bgView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.window attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+    [self.window addConstraint:leftConstraint];
+
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.bgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.window attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+    [self.window addConstraint:topConstraint];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.bgView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.window attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    [self.window addConstraint:bottomConstraint];
+
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    // 添加宽度约束:父控件的一半
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeWidth multiplier:0.8 constant:0];
+    [self.bgView addConstraint:widthConstraint];
+
+    // 添加高度约束:父控件的一半
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.bgView attribute:NSLayoutAttributeHeight multiplier:0.0 constant:120];
+    [self.bgView addConstraint:heightConstraint];
+
+    // 水平居中
+    NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    [self.bgView addConstraint:centerXConstraint];
+
+    // 垂直居中
+    NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+    [self.bgView addConstraint:centerYConstraint];
+
+    [self setNeedsLayout];
+}
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

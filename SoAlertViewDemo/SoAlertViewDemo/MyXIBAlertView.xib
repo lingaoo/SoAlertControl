@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PPi-4t-b2u" userLabel="MyXIBAlertView" customClass="MyXIBAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAe-SF-a3Z">
+                    <rect key="frame" x="12" y="8" width="351" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="29" id="n83-pJ-1Xa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-u8-EGd">
+                    <rect key="frame" x="12" y="49" width="351" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="DXr-zI-p5W"/>
+                    </constraints>
+                    <string key="text">contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XC-ch-CdX">
+                    <rect key="frame" x="0.0" y="100" width="187.5" height="30"/>
+                    <state key="normal" title="OK"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UxN-gx-sUG">
+                    <rect key="frame" x="187.5" y="100" width="187.5" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="9tq-xh-eB5"/>
+                    </constraints>
+                    <state key="normal" title="Cancel"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="UxN-gx-sUG" secondAttribute="trailing" id="2lD-lR-jF6"/>
+                <constraint firstAttribute="bottom" secondItem="1XC-ch-CdX" secondAttribute="bottom" id="4p5-Xi-Q1x"/>
+                <constraint firstItem="1XC-ch-CdX" firstAttribute="top" secondItem="GRJ-u8-EGd" secondAttribute="bottom" constant="10" id="8df-eu-VoE"/>
+                <constraint firstItem="UxN-gx-sUG" firstAttribute="leading" secondItem="1XC-ch-CdX" secondAttribute="trailing" id="FwD-ey-TmN"/>
+                <constraint firstAttribute="trailing" secondItem="GRJ-u8-EGd" secondAttribute="trailing" constant="12" id="KAd-2W-ZMM"/>
+                <constraint firstAttribute="bottom" secondItem="UxN-gx-sUG" secondAttribute="bottom" id="KX3-lV-0Or"/>
+                <constraint firstItem="iAe-SF-a3Z" firstAttribute="top" secondItem="PPi-4t-b2u" secondAttribute="top" constant="8" id="Roo-2f-Mcs"/>
+                <constraint firstItem="iAe-SF-a3Z" firstAttribute="leading" secondItem="PPi-4t-b2u" secondAttribute="leading" constant="12" id="W6p-Uq-PV7"/>
+                <constraint firstAttribute="trailing" secondItem="iAe-SF-a3Z" secondAttribute="trailing" constant="12" id="fv3-1V-mOg"/>
+                <constraint firstItem="GRJ-u8-EGd" firstAttribute="top" secondItem="iAe-SF-a3Z" secondAttribute="bottom" constant="12" id="hQq-pD-G2K"/>
+                <constraint firstItem="GRJ-u8-EGd" firstAttribute="leading" secondItem="PPi-4t-b2u" secondAttribute="leading" constant="12" id="jDC-ib-ljY"/>
+                <constraint firstItem="UxN-gx-sUG" firstAttribute="width" secondItem="1XC-ch-CdX" secondAttribute="width" id="kcG-YL-hSK"/>
+                <constraint firstItem="UxN-gx-sUG" firstAttribute="height" secondItem="1XC-ch-CdX" secondAttribute="height" id="plL-aR-WlJ"/>
+                <constraint firstItem="1XC-ch-CdX" firstAttribute="leading" secondItem="PPi-4t-b2u" secondAttribute="leading" id="t3Y-4G-HW8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buttonCanel" destination="UxN-gx-sUG" id="aOx-b8-Ifr"/>
+                <outlet property="buttonOk" destination="1XC-ch-CdX" id="2Fx-BA-hsc"/>
+            </connections>
+            <point key="canvasLocation" x="-111.5" y="-505"/>
+        </view>
+    </objects>
+</document>

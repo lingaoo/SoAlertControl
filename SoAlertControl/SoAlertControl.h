@@ -26,7 +26,7 @@
 // alert 显示顺序
 #define KK_ALERTCONTROL_STACK NO
 typedef enum : NSUInteger {
-    SoAlertControlStack = 0,  // 后进后显示
+    SoAlertControlStack = 0,  // 先进先显示
     SoAlertControlHeap = 1,  //  后进先显示
 } SoAlertControlType;
 

@@ -21,7 +21,9 @@
 
 -(void)addButtonTitle:(NSString *)title click:(void (^)(SoAlertView *, UIButton *))clickBlock {
     __weak typeof(self) weakSelf = self;
-    [self addLineView:nil];
+    [self addLineView:^(UIView *lineView) {
+        [weakSelf configCenterLineView:lineView];
+    }];
     
     [self addButtonConfig:^(UIButton *button) {
         [weakSelf configOnlyButton:button corner:10];
@@ -44,13 +46,13 @@
     } click:^(SoAlertView *alertView, UIButton *button) {
         [weakSelf dismiss];
     }];
-    
+
     // 添加横线
     [self addLineView:^(UIView *lineView) {
-        
+        [weakSelf configCenterLineView:lineView];
     }];
     [self addLineView:^(UIView *lineView) {
-        lineView.frame = CGRectMake(weakSelf.frame.size.width/2.0, weakSelf.frame.size.height - 48, 1.0/[UIScreen mainScreen].scale, 48);
+        [weakSelf configButtonLineView:lineView];
     }];
     
 }
