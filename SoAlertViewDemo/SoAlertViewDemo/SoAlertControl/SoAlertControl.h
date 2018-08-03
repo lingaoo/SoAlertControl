@@ -13,7 +13,7 @@
     
 }
 
-/// 所有alert统一显示 SoBackgroundView
+/// 所有alert统一显示 SoAlertBgView
 @property (nonatomic,strong)UIView *bgView;
 
 /// 继承SoAlertView 自定义

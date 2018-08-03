@@ -12,6 +12,7 @@
 
 
 +(instancetype)alertViewXIB {
+    
     NSArray* nibView = [[NSBundle mainBundle] loadNibNamed:@"MyXIBAlertView" owner:nil options:nil];
 
     return nibView.firstObject;

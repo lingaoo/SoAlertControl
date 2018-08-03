@@ -192,19 +192,15 @@
 
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
 
-    // 添加宽度约束:父控件的一半
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeWidth multiplier:0.8 constant:0];
     [self.bgView addConstraint:widthConstraint];
 
-    // 添加高度约束:父控件的一半
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.bgView attribute:NSLayoutAttributeHeight multiplier:0.0 constant:120];
     [self.bgView addConstraint:heightConstraint];
 
-    // 水平居中
     NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
     [self.bgView addConstraint:centerXConstraint];
 
-    // 垂直居中
     NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
     [self.bgView addConstraint:centerYConstraint];
 
