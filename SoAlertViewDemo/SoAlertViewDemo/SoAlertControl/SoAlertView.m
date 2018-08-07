@@ -190,8 +190,7 @@
     
 }
 
--(void)clickOneButton:(UIButton *)sender
-{
+-(void)clickOneButton:(UIButton *)sender {
     NSInteger index = [self.buttonMutables indexOfObject:sender];
     if(index == NSNotFound) return;
     

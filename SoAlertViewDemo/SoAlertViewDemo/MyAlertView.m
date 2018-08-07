@@ -40,6 +40,7 @@
     } click:^(SoAlertView *alertView, UIButton *button) {
         [weakSelf dismiss];
     }];
+    
     [self addButtonConfig:^(UIButton *button) {
         [weakSelf configRightButton:button corner:10];
         [button setTitle:rightTitle forState:UIControlStateNormal];
