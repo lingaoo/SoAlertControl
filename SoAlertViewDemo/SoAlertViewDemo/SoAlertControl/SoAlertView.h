@@ -22,6 +22,12 @@
 {
     
 }
+@property (nonatomic, copy) AnimationBlock animationShowBlock;
+@property (nonatomic, copy) AnimationBlock animationDismissBlock;
+
+//@property (nonatomic, copy) AnimationShowBlock animationShowBlock;
+//@property (nonatomic, copy) AnimationDismissBlock animationDismissBlock;
+
 /// labelTitle的title，设置該值labelTitle和SoAlertView并适应内容大小
 @property (copy, nonatomic) NSString *stringTitle;
 

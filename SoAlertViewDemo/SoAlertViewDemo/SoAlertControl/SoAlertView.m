@@ -331,6 +331,9 @@
     
     if(altcTemp == nil) {
         SoAlertControl * alctrol = [[SoAlertControl alloc] init];
+        alctrol.animationShowBlock = self.animationShowBlock;
+        alctrol.animationDismissBlock = self.animationDismissBlock;
+        
         alctrol.contentView = self;
         
         if([SoAlertViewManager shareInstance].controlType == SoAlertControlHeap) {
@@ -341,6 +344,8 @@
     }
     
     SoAlertControl *alc =  [SoAlertViewManager shareInstance].alertQueue.firstObject;
+    alc.animationShowBlock = self.animationShowBlock;
+    alc.animationDismissBlock = self.animationDismissBlock;
     [alc showComplete:^{
         if(complete) complete();
     }];
