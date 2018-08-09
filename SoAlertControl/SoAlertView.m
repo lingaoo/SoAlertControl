@@ -12,6 +12,10 @@
 {
     
 }
+@property (nonatomic, copy) AnimationBlock animationShowBlock;
+@property (nonatomic, copy) AnimationBlock animationDismissBlock;
+@property (nonatomic, copy) ContraintBlock contraintBlock;
+
 -(void)show;
 -(void)dismiss;
 -(void)showComplete:(void(^)(void))complete;
@@ -190,8 +194,7 @@
     
 }
 
--(void)clickOneButton:(UIButton *)sender
-{
+-(void)clickOneButton:(UIButton *)sender {
     NSInteger index = [self.buttonMutables indexOfObject:sender];
     if(index == NSNotFound) return;
     
@@ -332,6 +335,9 @@
     
     if(altcTemp == nil) {
         SoAlertControl * alctrol = [[SoAlertControl alloc] init];
+        alctrol.animationShowBlock = self.animationShowBlock;
+        alctrol.animationDismissBlock = self.animationDismissBlock;
+        alctrol.contraintBlock = self.contraintBlock;
         alctrol.contentView = self;
         
         if([SoAlertViewManager shareInstance].controlType == SoAlertControlHeap) {
@@ -342,6 +348,10 @@
     }
     
     SoAlertControl *alc =  [SoAlertViewManager shareInstance].alertQueue.firstObject;
+    alc.animationShowBlock = self.animationShowBlock;
+    alc.animationDismissBlock = self.animationDismissBlock;
+    alc.contraintBlock = self.contraintBlock;
+    
     [alc showComplete:^{
         if(complete) complete();
     }];

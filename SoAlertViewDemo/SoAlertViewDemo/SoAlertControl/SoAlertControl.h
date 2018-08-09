@@ -21,16 +21,11 @@ typedef void(^AnimationBlock)(SoAlertControl *control,AnimationCompleteBlock ani
 
 /// SoAlertBgView
 @property (nonatomic,strong)UIView *bgView;
+
 /// 继承SoAlertView 自定义
 @property (nonatomic,strong)UIView *contentView;
-/// 显示动画 (结束必需回调 animationComplete Block)
-@property (nonatomic, copy) AnimationBlock animationShowBlock;
-/// 消动动画 (结束必需回调 animationComplete Block)
-@property (nonatomic, copy) AnimationBlock animationDismissBlock;
-/// 修改约束 （主要修改contentView的约束）
-@property (nonatomic, copy) ContraintBlock contraintBlock;
-/// contentView的约束
-@property (nonatomic, copy) NSArray *contentViewContraints;
+/// contentView 的约束
+@property (nonatomic, copy)NSArray *contentViewContraints;
 
 @end
 

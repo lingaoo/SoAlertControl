@@ -40,6 +40,13 @@
 /// 显示状态 同(SoAlertViewManager)
 @property (nonatomic,assign)BOOL isVisiable;
 
+@property (nonatomic, copy) AnimationBlock animationShowBlock;
+
+@property (nonatomic, copy) AnimationBlock animationDismissBlock;
+/// 修改约束 （主要修改contentView的约束）
+@property (nonatomic, copy) ContraintBlock contraintBlock;
+
+
 @end
 
 @implementation SoAlertControl
@@ -115,67 +122,71 @@
     [self.bgView addSubview:self.contentView];
     [self.window addSubview:self.bgView];
     [self autolayout];
-
+    
     self.isVisiable = YES;
     [SoAlertViewManager shareInstance].alertControl = self;
 
+    
+    if(self.animationShowBlock) {
+        __block AnimationCompleteBlock animatioCompleteBlock = ^{[self completionWithShow:complete];};
+        self.animationShowBlock(self,animatioCompleteBlock);
+        return;
+    }
+    
     self.contentView.transform = CGAffineTransformMakeScale(0.8,0.8);
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.8 options:UIViewAnimationOptionLayoutSubviews animations:^{
-        self.contentView.transform = CGAffineTransformMakeScale(1,1);
-        self.contentView.alpha = 1;
+            self.contentView.transform = CGAffineTransformMakeScale(1,1);
+            self.contentView.alpha = 1;
+        
     } completion:^(BOOL finished) {
-        self.isVisiable = YES;
-        if(complete) complete();
+        [self completionWithShow:complete];
     }];
 }
 -(void)dismissComplete:(void (^)(void))complete {
     [[SoAlertViewManager shareInstance].alertQueue removeObject:self];
-    
-    [UIView animateWithDuration:0.3  animations:^{
-        self.contentView.transform = CGAffineTransformMakeScale(0.9,0.9);
-        self.contentView.alpha = 0.5;
-    } completion:^(BOOL finished) {
-        [self.bgView removeFromSuperview];
-        self.bgView = nil;
-        self.isVisiable = NO;
-        [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
-        self.window.alpha = 0;
-        self.window.hidden = YES;
-        self.window = nil;
-        if(complete) complete();
-        if ([SoAlertViewManager shareInstance].alertQueue.count > 0) {
-            SoAlertControl *soAlert = [SoAlertViewManager shareInstance].alertQueue.firstObject;
-            [soAlert show];
-        }else{
-            [SoAlertViewManager shareInstance].alertControl = nil;
-        }
-    }];
-}
--(void)dismissControlComplete:(void (^)(void))complete {
-    [UIView animateWithDuration:0.3  animations:^{
-        self.contentView.transform = CGAffineTransformMakeScale(0.8,0.8);
-        self.contentView.alpha = 0.5;
-    } completion:^(BOOL finished) {
-        [self.bgView removeFromSuperview];
-        self.bgView = nil;
-        self.isVisiable = NO;
-        [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
-        self.window.alpha = 0;
-        self.window.hidden = YES;
-        self.window = nil;
-        if(complete) complete();
-        if ([SoAlertViewManager shareInstance].alertQueue.count > 0) {
-            SoAlertControl *soAlert = [SoAlertViewManager shareInstance].alertQueue.firstObject;
-            [soAlert show];
-        }else{
-            [SoAlertViewManager shareInstance].alertControl = nil;
-            
-        }
-    }];
+    [self dismissControlComplete:complete];
 }
 
+-(void)dismissControlComplete:(void (^)(void))complete {
+    if(self.animationDismissBlock) {
+         AnimationCompleteBlock animatioCompleteBlock = ^{[self completionWithDismiss:complete];};
+        self.animationDismissBlock(self,animatioCompleteBlock);
+    }else {
+        [UIView animateWithDuration:0.3 animations:^{
+            [self animationDismissScale];
+        } completion:^(BOOL finished) {
+            [self completionWithDismiss:complete];
+        }];
+    }
+}
+
+-(void)animationDismissScale {
+    self.contentView.transform = CGAffineTransformMakeScale(0.8,0.8);
+    self.contentView.alpha = 0.5;
+}
+
+-(void)completionWithShow:(void (^)(void))complete {
+    self.isVisiable = YES;
+    if(complete) complete();
+}
+
+-(void)completionWithDismiss:(void (^)(void))complete {
+    [self.bgView removeFromSuperview];
+    self.bgView = nil;
+    self.isVisiable = NO;
+    [self.window.subviews.copy enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {[obj removeFromSuperview];}];
+    self.window.alpha = 0;
+    self.window.hidden = YES;
+    self.window = nil;
+    if(complete) complete();
+    if ([SoAlertViewManager shareInstance].alertQueue.count > 0) {
+        SoAlertControl *soAlert = [SoAlertViewManager shareInstance].alertQueue.firstObject;
+        [soAlert show];
+    }else{
+        [SoAlertViewManager shareInstance].alertControl = nil;
+    }
+    
+}
 -(void)autolayout {
      self.bgView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.bgView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.window attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
@@ -192,23 +203,23 @@
 
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
 
-    // 添加宽度约束:父控件的一半
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeWidth multiplier:0.8 constant:0];
     [self.bgView addConstraint:widthConstraint];
 
-    // 添加高度约束:父控件的一半
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.bgView attribute:NSLayoutAttributeHeight multiplier:0.0 constant:120];
     [self.bgView addConstraint:heightConstraint];
 
-    // 水平居中
     NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
     [self.bgView addConstraint:centerXConstraint];
 
-    // 垂直居中
     NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.bgView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
     [self.bgView addConstraint:centerYConstraint];
+    
+    self.contentViewContraints = @[widthConstraint,heightConstraint,centerXConstraint,centerYConstraint];
+   
+    !self.contraintBlock?:self.contraintBlock(self);
 
-    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 

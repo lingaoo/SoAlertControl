@@ -40,6 +40,13 @@
 /// 显示状态 同(SoAlertViewManager)
 @property (nonatomic,assign)BOOL isVisiable;
 
+@property (nonatomic, copy) AnimationBlock animationShowBlock;
+
+@property (nonatomic, copy) AnimationBlock animationDismissBlock;
+/// 修改约束 （主要修改contentView的约束）
+@property (nonatomic, copy) ContraintBlock contraintBlock;
+
+
 @end
 
 @implementation SoAlertControl
@@ -115,8 +122,6 @@
     [self.bgView addSubview:self.contentView];
     [self.window addSubview:self.bgView];
     [self autolayout];
-    
-    !self.contraintBlock?:self.contraintBlock(self);
     
     self.isVisiable = YES;
     [SoAlertViewManager shareInstance].alertControl = self;
@@ -211,6 +216,8 @@
     [self.bgView addConstraint:centerYConstraint];
     
     self.contentViewContraints = @[widthConstraint,heightConstraint,centerXConstraint,centerYConstraint];
+   
+    !self.contraintBlock?:self.contraintBlock(self);
 
     [self layoutIfNeeded];
 }

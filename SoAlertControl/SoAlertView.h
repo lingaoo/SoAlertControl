@@ -22,16 +22,22 @@
 {
     
 }
-/// labelTitle的title，设置該值labelTitle和SoAlertView并适应内容大小
-@property (copy, nonatomic) NSString *stringTitle;
-
-/// labelMessage的title，设置該值labelMessage和SoAlertView并适应内容大小
-@property (copy, nonatomic) NSString *stringMessage;
 
 /// title
-@property (strong, nonatomic) UILabel *labelTitle;
+@property (nonatomic, strong) UILabel *labelTitle;
+@property (nonatomic, copy) NSString *stringTitle;
 /// message
-@property (strong, nonatomic) UILabel *labelMessage;
+@property (nonatomic, strong) UILabel *labelMessage;
+@property (nonatomic, copy) NSString *stringMessage;
+
+/// 显示动画 (结束必需回调 animationComplete Block)
+@property (nonatomic, copy) AnimationBlock animationShowBlock;
+/// 消动动画 (结束必需回调 animationComplete Block)
+@property (nonatomic, copy) AnimationBlock animationDismissBlock;
+
+/// 修改约束 （主要修改contentView的约束）
+@property (nonatomic, copy) ContraintBlock contraintBlock;
+
 
 /**
  初始化
