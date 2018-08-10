@@ -66,11 +66,9 @@
     }];
     
     //e.g 2
-    
     MyXIBAlertView *alertView = [MyXIBAlertView alertViewXIB];
     [alertView.buttonCanel addTarget:alertView action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [alertView.buttonOk addTarget:self action:@selector(nslog) forControlEvents:UIControlEventTouchUpInside];
-
     [alertView show];
             
 }

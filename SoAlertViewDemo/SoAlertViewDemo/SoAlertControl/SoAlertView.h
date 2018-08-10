@@ -89,8 +89,6 @@
 -(void)configLeftButton:(UIButton *)leftBtn corner:(CGFloat)corner;
 -(void)configRightButton:(UIButton *)rightBtn corner:(CGFloat)corner;
 
-
-
 @end
 
 

@@ -34,14 +34,16 @@
 
 #pragma mark - SoAlertControl
 @interface SoAlertControl ()
-
+{
+    
+}
+///
 @property (nonatomic, strong) UIWindow *window;
-
 /// 显示状态 同(SoAlertViewManager)
 @property (nonatomic,assign)BOOL isVisiable;
-
+///
 @property (nonatomic, copy) AnimationBlock animationShowBlock;
-
+///
 @property (nonatomic, copy) AnimationBlock animationDismissBlock;
 /// 修改约束 （主要修改contentView的约束）
 @property (nonatomic, copy) ContraintBlock contraintBlock;
@@ -94,8 +96,6 @@
     SoAlertControl *alertControl = [[SoAlertControl alloc]init];
     return alertControl;
 }
-
-
 
 #pragma mark - Animation
 -(void)show {
